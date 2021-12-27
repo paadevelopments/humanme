@@ -42,7 +42,7 @@ human.stop()                        // For stopping autoRefresh. Works only if a
 human.getCode()                     // To get rendered code
 ```
 ## Release History
-*  Initial [ v0.0.1 ]
+*  Initial [ v1.0.0 ]
 
 ## License
 MIT
