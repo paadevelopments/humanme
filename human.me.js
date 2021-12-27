@@ -1,5 +1,5 @@
 /*
- * HumanMe ~ beta v1.0.1
+ * HumanMe ~ v1.0.0
  *
  * Author : Paa
  * Dependencies : { jQuery }
