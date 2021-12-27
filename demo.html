@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head>
+<title>HumanMe CAPTCHA</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<script src="jquery.js"></script><script src="human.me.js"></script>
+<style type="text/css">
+.alert{width:300px;height:40px;display:flex;justify-content:center;align-items:center;padding:5px 0
+color:#FFFFFF;background:#FFFFFF;}
+.alert div{width:100%;height:100%;border-radius:5px;background:#6671F0;color:#FFFFFF;text-align:center;
+cursor:default;display:flex;justify-content:center;align-items:center;}
+#div_to_set_captcha{width:300px;height:50px;border:1px solid #000000;border-radius:5px;overflow:hidden;}
+input{width:300px;margin:10px 0;height:30px;}#button{width:auto;height:30px;margin-bottom:10px;}
+</style></head><body>
+<div id="div_to_set_captcha"></div><input placeholder="enter code"/><br><button id="button">Verify</button></body>
+<script type="text/javascript">
+$(document).ready(function(){
+	// CAPTCHA INITIATION AND OPTIONS
+	var human = new HumanMe($('#div_to_set_captcha'),{
+		length : 6,							// Lenght of captcha text. Default = 6
+
+		font : 'bold 35px Arial',			// Renderer font style. Default = 'bold 35px Arial'
+
+		resourceType : 'aA0',				// Charset. Set 'a' for lowerCase letters only. Set 'A' for upperCase letters only,
+											// Set '0' for numbers only. You can pair formats like 'A0' for upperCase letters and
+											// numbers only or 'a0' for lowerCase letters and numbers only. Default = 'aA0'
+
+		caseSensitive : true,				// Validation string case sensitivity. Set false to disable. Default = true
+
+		autoRefresh : true,					// Auto refresh with counter. Set false to disable. Default = true
+
+		progressColor : '#6671F0',			// Auto refresh progress color. Only works if autoRefresh is true. Default color '#6671F0'
+
+		manualRefresh : true,				// Manual refresh button. Set false to disable
+
+		refreshButtonColor : '#6671F0'		// Manual refresh button color. Only works if manualRefresh is true
+	})
+
+	// VALIDATION TEST
+	$('#button').on('click',function(){
+		if ($('input').val().trim().length == 0) return show_alert('No input','red')
+		if (!human.validate($('input').val()))  { $('input').val(''); return show_alert('Invalid code','red') }
+		$('input').val(''); human.stop()
+		return show_alert('Valid code','green')
+	})
+
+	// OBJECT METHODS
+	// human.validate("string to verify")	// For validation. Takes one parameter. String. Returns true or false
+	// human.stop()							// For stopping autoRefresh. Works only if autoRefresh is enabled
+	// human.getCode()						// To get rendered code
+})
+
+// IRRELIVALT TO LIBRARY
+function show_alert(a,a_b,b = Date.now()){
+	$('.alert').remove()
+	$('body').append('<div class="alert" id="alert_'+ b +'"><div style="background:'+ a_b +';">'+ a +'</div></div>')
+	setTimeout(function(){ $('#alert_'+ b).remove() },2500)
+}
+</script>
+</html>
