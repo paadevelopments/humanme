@@ -4,7 +4,7 @@ A javascript CAPTCHA library for your web apps to keep the bots out.
 > **NOTE:** This is an extension of @honguangli [ JQuery CAPTCHA ](https://github.com/honguangli/jquery-captcha)
 
 ## Preview
-
+![](preview.png)
 
 ## Getting Started [ installation ]
 ```
